@@ -24,16 +24,14 @@ file = st.file_uploader('Upload a JSON file here', type=['json'])
 if file is not None:
 
     data = json.load(file)
-    if data:
-        st.json(data)  # Display the data in Streamlit
-    else:
-        st.error("The file is empty or has invalid JSON content.")
-        raise ValueError("The file is empty or has invalid JSON content.")
-    #st.json(data)
+    st.json(data)
     file.seek(0)
     filename = file.name
 
     try:
+        if s3_bucket_name is None:
+            st.error("❌ S3_BUCKET_NAME is not set. Check your environment variables.")
+            raise ValueError("S3_BUCKET_NAME is None")
         s3_client.upload_fileobj(
             file,
             s3_bucket_name,
