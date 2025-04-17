@@ -22,8 +22,14 @@ file = st.file_uploader('Upload a JSON file here', type=['json'])
 
 
 if file is not None:
+
     data = json.load(file)
-    st.json(data)
+    if data:
+        st.json(data)  # Display the data in Streamlit
+    else:
+        st.error("The file is empty or has invalid JSON content.")
+        raise ValueError("The file is empty or has invalid JSON content.")
+    #st.json(data)
     file.seek(0)
     filename = file.name
 
