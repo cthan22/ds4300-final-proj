@@ -1,5 +1,4 @@
 streamlit
-json
 boto3
 os
 dotenv
