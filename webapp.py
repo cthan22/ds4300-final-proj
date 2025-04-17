@@ -20,26 +20,14 @@ s3_client = boto3.client(
 st.title('Wine Reviews')
 file = st.file_uploader('Upload a JSON file here', type=['json'])
 
-# s3_client.put_object(
-#     Bucket='ds4300-final-project-han',
-#     Key='test2-upload.json',
-#     Body='{"hello": "world"}',
-#     ContentType='application/json'
-# )
 
 if file is not None:
-    #data = json.load(file)
-    #st.json(data)
+    data = json.load(file)
+    st.json(data)
+    file.seek(0)
     filename = file.name
 
     try:
-
-        # s3_client.upload_fileobj(
-        #     Bucket='ds4300-final-project-han',
-        #     Key=filename,
-        #     Body=json.dumps(data),
-        #     ContentType='application/json'
-        # )
         s3_client.upload_fileobj(
             file,
             s3_bucket_name,
