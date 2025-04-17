@@ -29,9 +29,7 @@ if file is not None:
     filename = file.name
 
     try:
-        if s3_bucket_name is None:
-            st.error("❌ S3_BUCKET_NAME is not set. Check your environment variables.")
-            raise ValueError("S3_BUCKET_NAME is None")
+        
         s3_client.upload_fileobj(
             file,
             s3_bucket_name,
